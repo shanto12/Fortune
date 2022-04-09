@@ -226,24 +226,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address[]",
-						"name": "_addresses",
-						"type": "address[]"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					}
-				],
-				"name": "_batchRemoveWhitelist",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "account",
 						"type": "address"
@@ -287,6 +269,24 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_addresses",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "batchRemoveWhitelist",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -879,11 +879,11 @@
 	},
 	"sources": {
 		"contracts/fortune_eth_flat.sol": {
-			"keccak256": "0x15d531dcb7dc844cb11576b9ee21ef7ce33d98e12f124457383f1cb96ae6df3c",
+			"keccak256": "0x3f04a9f8c21ea4d1977a63e1c2f90e384e409288fa8893354fe4404e971f6035",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ad8a40a307c236d710059c9fd82a88064972d433a6af74465a0f682874b98f6b",
-				"dweb:/ipfs/QmQvqu3WugfP88mFJ13bPQ4geWcAEwXmkCYLC7veJxQnAr"
+				"bzz-raw://8ad3f10fbe5e1d8089a5bebe2498a316f5d6b8002d4c7aab86708f045322cc2e",
+				"dweb:/ipfs/QmNcuQR1GJ7wnZZk6okKp2VEy8MqNnzBLGcmSRVBqkC7SP"
 			]
 		}
 	},

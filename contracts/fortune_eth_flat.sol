@@ -1386,7 +1386,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         WhitelistCount[0] += _count[0];
     }      
   
-    function _batchRemoveWhitelist(address[] memory _addresses, uint256 _id) 
+    function batchRemoveWhitelist(address[] memory _addresses, uint256 _id) 
         external 
         onlyOwner
         validTokenId (_id) 
@@ -1433,7 +1433,8 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
     }
     
 
-    function getWhitelistCount(uint _id) public view returns (uint) {                
+    function getWhitelistCount(uint _id) public view returns (uint) 
+    {                
         return WhitelistCount[_id-1];        
     }
     modifier onlyWhitelistAddress(address _to) {
