@@ -1333,9 +1333,17 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
 
             require(minted[_eacId-1] + 1 <= supplies[_eacId-1], "Not enough supply");
             require(msg.value >= rates[_eacId-1], "Not enough ether sent");            
-            _mint(_to, _eacId, 1, "");        
-        }
-        
+            _mint(_to, _eacId, 1, "");               
+        }        
+        // address[] memory _toArray;
+        // _toArray[0]=_to;
+        // _toArray.push(1);
+        // _RemoveWhitelist(_toArray, _id);     
+        // address[] memory _toArray = new address[](_to); 
+        // c[0] = (_candidates[i]);
+        _RemoveWhitelist(_to, _id);     
+        // acceptsArray(c);
+
     }
     function burn(uint _id, uint _amount) external {
         _burn(msg.sender, _id, _amount);
@@ -1379,27 +1387,45 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         require(WhitelistCount[_id-1]+count<=supplies[_id-1], "Exceed maxSupply");
         WhitelistCount[_id-1] += count;
     }      
-    function RemoveWhitelist(address[] memory _addresses, uint256 _id)  external {
-        _RemoveWhitelist(_addresses, _id);
-    }  
-    function _RemoveWhitelist(address[] memory _addresses, uint256 _id) 
+    // function RemoveWhitelist(address[] memory _addresses, uint256 _id)  external {
+    //     _RemoveWhitelist(_addresses, _id);
+    // }  
+
+    function _batchRemoveWhitelist(address[] memory _addresses, uint256 _id) 
+        external 
+        onlyOwner
+        validTokenId (_id) 
+    {
+        uint256 _count=0;
+        for (uint i=0; i<_addresses.length; i++) {            
+            _RemoveWhitelist(_addresses[i], _id);            
+            _count++;                       
+        }        
+        WhitelistCount[_id-1] -= _count; 
+        
+    }
+    function _RemoveWhitelist(address _address, uint256 _id) 
         internal 
         onlyOwner
         validTokenId (_id) 
     {
-        uint256 count=0;
-        for (uint i=0; i<_addresses.length; i++) {
-            
-            if (whitelist[_addresses[i]] !=0) {                
-                whitelist[_addresses[i]]=0;
-                count +=1;
+        uint256 _count=0;
+        // for (uint i=0; i<_addresses.length; i++) {            
+        if (whitelist[_address] !=0) {                
+            if (_id ==1) {                
+                whitelist[_address]=0;
             }
-            else     {
-                emit Log("Adress is not already whitelisted", _addresses[i], WhitelistCount[_id-1], whitelist[_addresses[i]]);                                
-            }  
+            else {
+                whitelist[_address]=1;
+            }                
+            _count++;
+        }
+        else     {
+            emit Log("Adress is not already whitelisted", _address, WhitelistCount[_id-1], whitelist[_address]);                                
+        }  
                        
-        }        
-        WhitelistCount[_id-1] -= count; 
+        // }        
+        WhitelistCount[_id-1] -= _count; 
         
     }
     function IsWhitelisted(address _address) public view returns (uint) {                
