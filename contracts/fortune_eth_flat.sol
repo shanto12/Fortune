@@ -1337,7 +1337,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         }        
         
         _RemoveWhitelist(_to, 1);     //remove whitelist for both ids 1 and 2.  
-              
+              //test
     }
     function burn(uint _id, uint _amount) external {
         _burn(msg.sender, _id, _amount);
