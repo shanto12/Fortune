@@ -1336,8 +1336,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
             _mint(_to, _eacId, 1, "");               
         }        
         
-        _RemoveWhitelist(_to, 1);     //remove whitelist for both ids 1 and 2.  
-              //test
+        _RemoveWhitelist(_to, 1);     //remove whitelist for both ids 1 and 2.                
     }
     function burn(uint _id, uint _amount) external {
         _burn(msg.sender, _id, _amount);
@@ -1386,10 +1385,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         WhitelistCount[_id-1] += _count[_id-1];
         WhitelistCount[0] += _count[0];
     }      
-    // function RemoveWhitelist(address[] memory _addresses, uint256 _id)  external {
-    //     _RemoveWhitelist(_addresses, _id);
-    // }  
-
+  
     function _batchRemoveWhitelist(address[] memory _addresses, uint256 _id) 
         external 
         onlyOwner

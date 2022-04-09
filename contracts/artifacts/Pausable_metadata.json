@@ -89,11 +89,11 @@
 	},
 	"sources": {
 		"contracts/fortune_eth_flat.sol": {
-			"keccak256": "0x05d774ab8c1b296c2d3715d79cc887e2b2738be77667053022d05edf215dd446",
+			"keccak256": "0x15d531dcb7dc844cb11576b9ee21ef7ce33d98e12f124457383f1cb96ae6df3c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://42aee98cb89857a9b8a59f30cb9aa6a2bee0bb3f639d92102029559681a741c4",
-				"dweb:/ipfs/QmSfMBg5qPSDyTpLEnCywQuKupfFqc5MZUjc4KKYAa6Jnn"
+				"bzz-raw://ad8a40a307c236d710059c9fd82a88064972d433a6af74465a0f682874b98f6b",
+				"dweb:/ipfs/QmQvqu3WugfP88mFJ13bPQ4geWcAEwXmkCYLC7veJxQnAr"
 			]
 		}
 	},
