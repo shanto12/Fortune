@@ -1382,7 +1382,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
             }               
         }
         require(WhitelistCount[_id-1] + _count[_id-1]<=supplies[_id-1], "Exceed maxSupply");
-        require(WhitelistCount[_id-1] + _count[0]<=supplies[_id-1], "Exceed maxSupply");
+        require(WhitelistCount[0] + _count[0]<=supplies[0], "Exceed maxSupply");
         WhitelistCount[_id-1] += _count[_id-1];
         WhitelistCount[0] += _count[0];
     }      
