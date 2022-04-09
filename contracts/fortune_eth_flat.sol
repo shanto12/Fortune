@@ -1362,24 +1362,29 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
     }
     
-    function WhitelistAddresses(address[] memory _addresses, uint256 _id) 
+    function batchWhitelistAddress(address[] memory _addresses, uint256 _id) 
         external 
         onlyOwner
         validTokenId (_id)       
     {
-        uint256 count=0;
+        uint8[2] memory _count=[0,0];
         for (uint i=0; i<_addresses.length; i++) {
-            emit Log("in for loop", _addresses[i], count, whitelist[_addresses[i]]);            
+            // emit Log("in for loop", _addresses[i], _count, whitelist[_addresses[i]]);            
             if (whitelist[_addresses[i]] == 0) {                
                 whitelist[_addresses[i]]=_id;                         
-                count +=1;
+                _count[_id-1]++;
+                if (_id != 1) {
+                    _count[0]++;
+                }
             }   
             else     {
                 emit Log("address is already whitelisted", _addresses[i], WhitelistCount[_id-1], whitelist[_addresses[i]]);                
             }               
         }
-        require(WhitelistCount[_id-1]+count<=supplies[_id-1], "Exceed maxSupply");
-        WhitelistCount[_id-1] += count;
+        require(WhitelistCount[_id-1] + _count[_id-1]<=supplies[_id-1], "Exceed maxSupply");
+        require(WhitelistCount[_id-1] + _count[0]<=supplies[_id-1], "Exceed maxSupply");
+        WhitelistCount[_id-1] += _count[_id-1];
+        WhitelistCount[0] += _count[0];
     }      
     // function RemoveWhitelist(address[] memory _addresses, uint256 _id)  external {
     //     _RemoveWhitelist(_addresses, _id);
