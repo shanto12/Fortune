@@ -1335,15 +1335,9 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
             require(msg.value >= rates[_eacId-1], "Not enough ether sent");            
             _mint(_to, _eacId, 1, "");               
         }        
-        // address[] memory _toArray;
-        // _toArray[0]=_to;
-        // _toArray.push(1);
-        // _RemoveWhitelist(_toArray, _id);     
-        // address[] memory _toArray = new address[](_to); 
-        // c[0] = (_candidates[i]);
-        _RemoveWhitelist(_to, _id);     
-        // acceptsArray(c);
-
+        
+        _RemoveWhitelist(_to, 1);     //remove whitelist for both ids 1 and 2.  
+              
     }
     function burn(uint _id, uint _amount) external {
         _burn(msg.sender, _id, _amount);
