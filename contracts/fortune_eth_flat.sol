@@ -9,7 +9,7 @@ pragma solidity ^0.8.0;
 
 
 /**
- * @dev Provides information about the current execution context, including the
+ * @dev Provides information about the current execaution context, including the
  * sender of the transaction and its data. While these are generally available
  * via msg.sender and msg.data, they should not be accessed in such a direct
  * manner, since when dealing with meta-transactions the account sending and
@@ -1308,34 +1308,36 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
     function withdrawAll() payable external onlyOwner  {        
         payable(msg.sender).transfer(address(this).balance);
     }    
-    function mint(address _to) 
+    function mintAll(address _to) 
         external 
-        payable
-        onlyOwner
+        payable        
         whenNotPaused        
         onlyWhitelistAddress (_to)        
     {        
+        require(msg.value >= rates[0], "Not enough ether sent");                
+
         uint _id = IsWhitelisted(_to);
+        mint(_to, _id);            
 
+        if (_id !=1)  {
+            mint(_to, 1);                          
+        } 
+        _RemoveWhitelist(_to, _id);     //remove whitelist for both ids 1 and 2.                           
+    }
+
+
+    function mint(address _to, uint _id) 
+        internal         
+        whenNotPaused        
+        onlyWhitelistAddress (_to)        
+    {   
         require(_id <= supplies.length && _id >0, "Token doesn't exist");    
-        uint256 index=_id-1;
-
-        require(minted[index] + 1 <= supplies[index], "Not enough supply");
-        require(msg.value >= rates[index], "Not enough ether sent");        
+        
+        require(minted[_id-1] + 1 <= supplies[_id-1], "Not enough supply");        
         _mint(_to, _id, 1, "");
         
-        minted[index]++;
-        if (_id !=1)  {
-            uint _eacId = 1;
-
-            require(_eacId <= supplies.length && _eacId >0, "Token doesn't exist");                
-
-            require(minted[_eacId-1] + 1 <= supplies[_eacId-1], "Not enough supply");
-            require(msg.value >= rates[_eacId-1], "Not enough ether sent");            
-            _mint(_to, _eacId, 1, "");               
-        }        
+        minted[_id-1]++;               
         
-        _RemoveWhitelist(_to, 1);     //remove whitelist for both ids 1 and 2.                
     }
     function burn(uint _id, uint _amount) external {
         _burn(msg.sender, _id, _amount);
@@ -1365,24 +1367,26 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         onlyOwner
         validTokenId (_id)       
     {
-        uint8[2] memory _count=[0,0];
+        // uint8[2] memory _count=[0,0];
         for (uint i=0; i<_addresses.length; i++) {
             // emit Log("in for loop", _addresses[i], _count, whitelist[_addresses[i]]);            
             if (whitelist[_addresses[i]] == 0) {                
                 whitelist[_addresses[i]]=_id;                         
-                _count[_id-1]++;
+                require(WhitelistCount[_id-1] + 1 <=supplies[_id-1], "Exceed maxSupply");
+                WhitelistCount[_id-1]++;
                 if (_id != 1) {
-                    _count[0]++;
+                    require(WhitelistCount[0] + 1 <=supplies[0], "Exceed maxSupply");
+                    WhitelistCount[0]++;
                 }
             }   
             else     {
                 emit Log("address is already whitelisted", _addresses[i], WhitelistCount[_id-1], whitelist[_addresses[i]]);                
             }               
         }
-        require(WhitelistCount[_id-1] + _count[_id-1]<=supplies[_id-1], "Exceed maxSupply");
-        require(WhitelistCount[0] + _count[0]<=supplies[0], "Exceed maxSupply");
-        WhitelistCount[_id-1] += _count[_id-1];
-        WhitelistCount[0] += _count[0];
+        
+        
+        // WhitelistCount[_id-1] += _count[_id-1];
+        // WhitelistCount[0] += _count[0];
     }      
   
     function batchRemoveWhitelist(address[] memory _addresses, uint256 _id) 
@@ -1403,22 +1407,25 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         onlyOwner
         validTokenId (_id) 
     {
-        uint256 _count=0;
+        // uint8[2] memory _count=[0,0];
         // for (uint i=0; i<_addresses.length; i++) {            
         if (whitelist[_address] !=0) {                
             if (_id ==1) {                
-                whitelist[_address]=0;
+                whitelist[_address]=0;                
             }
             else {
                 whitelist[_address]=1;
-            }                
-            _count++;            
+                WhitelistCount[_id-1]--;
+            }            
+            WhitelistCount[0]--;
+            
         }
         else     {
             emit Log("Adress is not already whitelisted", _address, WhitelistCount[_id-1], whitelist[_address]);                                
         }                        
         
-        WhitelistCount[_id-1] -= _count; 
+        // WhitelistCount[_id-1] -= _count[_id-1]; 
+        // WhitelistCount[_id-1] -= _count[0]; 
         
     }
     function IsWhitelisted(address _address) public view returns (uint) {                
