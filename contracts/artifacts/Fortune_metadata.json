@@ -708,6 +708,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -879,11 +892,11 @@
 	},
 	"sources": {
 		"contracts/fortune_eth_flat.sol": {
-			"keccak256": "0x3f04a9f8c21ea4d1977a63e1c2f90e384e409288fa8893354fe4404e971f6035",
+			"keccak256": "0x469cc0e01a12af6c69f9c7db7b2583d436f01cecc9af9d37505d56530bf1c4f0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8ad3f10fbe5e1d8089a5bebe2498a316f5d6b8002d4c7aab86708f045322cc2e",
-				"dweb:/ipfs/QmNcuQR1GJ7wnZZk6okKp2VEy8MqNnzBLGcmSRVBqkC7SP"
+				"bzz-raw://8c27a1e7dcf2601bdc9da74d7aebe7d01abb81e4e67466995012f840462b98d9",
+				"dweb:/ipfs/QmcKRjSm8Ay5d69PogZf3WQVeyTQuhoi5S3xKyaGz5zw2b"
 			]
 		}
 	},

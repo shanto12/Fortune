@@ -1269,11 +1269,9 @@ pragma solidity ^0.8.4;
 
 
 
-
-
-
 contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
     string public name="Fortune Treasure Hunting";
+    string public symbol="FORT";
       
     uint256[] supplies = [4000, 250];
     uint256[] minted = [0, 0];
@@ -1286,7 +1284,8 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
     event Log(string msg, address _id, uint count, uint addressvalue);
 
     constructor() ERC1155("") {
-        name=name;        
+        name=name;  
+        symbol=symbol;      
     }
 
     function setURI(uint _id, string memory _uri) external onlyOwner {
@@ -1413,7 +1412,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
             else {
                 whitelist[_address]=1;
             }                
-            _count++;
+            _count++;            
         }
         else     {
             emit Log("Adress is not already whitelisted", _address, WhitelistCount[_id-1], whitelist[_address]);                                
