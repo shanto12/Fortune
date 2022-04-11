@@ -6,7 +6,7 @@
 	"output": {
 		"abi": [],
 		"devdoc": {
-			"details": "Provides information about the current execution context, including the sender of the transaction and its data. While these are generally available via msg.sender and msg.data, they should not be accessed in such a direct manner, since when dealing with meta-transactions the account sending and paying for execution may not be the actual sender (as far as an application is concerned). This contract is only required for intermediate, library-like contracts.",
+			"details": "Provides information about the current execaution context, including the sender of the transaction and its data. While these are generally available via msg.sender and msg.data, they should not be accessed in such a direct manner, since when dealing with meta-transactions the account sending and paying for execution may not be the actual sender (as far as an application is concerned). This contract is only required for intermediate, library-like contracts.",
 			"kind": "dev",
 			"methods": {},
 			"version": 1
@@ -19,7 +19,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/fortune_pol_flat.sol": "Context"
+			"contracts/fortune_eth_flat.sol": "Context"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -33,12 +33,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/fortune_pol_flat.sol": {
-			"keccak256": "0xaf93edd59462be02e033ea65d976c520bd0ed96aa9593f16ae517f107863c5b1",
+		"contracts/fortune_eth_flat.sol": {
+			"keccak256": "0xfc8da5efdad9c0662aa3d1e99435d77ea43fd8416385ec4a464cbfe63a155c8f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://424932d083dc0843763e1ff2250e61c3de5930466e4a7a012443f65b44f641f9",
-				"dweb:/ipfs/QmSfWZTNmHQrsTtwcgHoNXnT16fU182k8U3vvRHRfkQGTc"
+				"bzz-raw://46e00c61ccefa0c75d0cb834fa4833ae68bd001c584712aa2b0439788bd75526",
+				"dweb:/ipfs/Qmb2avzE2iQcw367F8qW33LWcD9N1rWakF8fPFRnk5MZaU"
 			]
 		}
 	},

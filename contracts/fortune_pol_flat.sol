@@ -1364,6 +1364,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         require(WhitelistCount[_id-1]+count<=supplies[_id-1], "Exceed maxSupply");
         WhitelistCount[_id-1] += count;
     }        
+    
 
     function RemoveWhitelist(address[] memory _addresses, uint256 _id) public 
         onlyOwner

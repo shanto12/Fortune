@@ -226,42 +226,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address[]",
-						"name": "_addresses",
-						"type": "address[]"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					}
-				],
-				"name": "RemoveWhitelist",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "_addresses",
-						"type": "address[]"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					}
-				],
-				"name": "WhitelistAddresses",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "account",
 						"type": "address"
@@ -305,6 +269,42 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_addresses",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "batchRemoveWhitelist",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_addresses",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "batchWhitelistAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -423,6 +423,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "contractBalance",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -487,9 +500,32 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address[]",
+						"internalType": "address",
 						"name": "_to",
-						"type": "address[]"
+						"type": "address"
+					}
+				],
+				"name": "mintAll",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "_amounts",
+						"type": "uint256[]"
 					}
 				],
 				"name": "mintBatch",
@@ -779,6 +815,13 @@
 				],
 				"stateMutability": "view",
 				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdrawAll",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -834,7 +877,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/fortune_pol_flat.sol": "Fortune"
+			"contracts/fortune_eth_flat.sol": "Fortune"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -848,12 +891,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/fortune_pol_flat.sol": {
-			"keccak256": "0xaf93edd59462be02e033ea65d976c520bd0ed96aa9593f16ae517f107863c5b1",
+		"contracts/fortune_eth_flat.sol": {
+			"keccak256": "0xfc8da5efdad9c0662aa3d1e99435d77ea43fd8416385ec4a464cbfe63a155c8f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://424932d083dc0843763e1ff2250e61c3de5930466e4a7a012443f65b44f641f9",
-				"dweb:/ipfs/QmSfWZTNmHQrsTtwcgHoNXnT16fU182k8U3vvRHRfkQGTc"
+				"bzz-raw://46e00c61ccefa0c75d0cb834fa4833ae68bd001c584712aa2b0439788bd75526",
+				"dweb:/ipfs/Qmb2avzE2iQcw367F8qW33LWcD9N1rWakF8fPFRnk5MZaU"
 			]
 		}
 	},
