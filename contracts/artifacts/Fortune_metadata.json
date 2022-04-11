@@ -226,42 +226,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address[]",
-						"name": "_addresses",
-						"type": "address[]"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					}
-				],
-				"name": "RemoveWhitelist",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "_addresses",
-						"type": "address[]"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					}
-				],
-				"name": "WhitelistAddresses",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "account",
 						"type": "address"
@@ -305,6 +269,42 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_addresses",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "batchRemoveWhitelist",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "_addresses",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "batchWhitelistAddress",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -505,7 +505,7 @@
 						"type": "address"
 					}
 				],
-				"name": "mint",
+				"name": "mintAll",
 				"outputs": [],
 				"stateMutability": "payable",
 				"type": "function"
@@ -708,6 +708,19 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -879,11 +892,11 @@
 	},
 	"sources": {
 		"contracts/fortune_eth_flat.sol": {
-			"keccak256": "0xefab579ecfbca0eca2c1cb28a6649815d7b75a9ad3ab1db4abf1727347e0efda",
+			"keccak256": "0xbf84b42cd7090e5bbebd207e9571686c20982473167b24083675a1fbd8cf0621",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2734e8cc89bce81c23e752ce1329f24464c10bd87187bda5ffe63458568c91c8",
-				"dweb:/ipfs/QmfK3VJrsknkPKSHdg58N9iHPVTNnHitPWL8VU7SRF1qmn"
+				"bzz-raw://405c5839d752c3220651517e7e35a21aa2b00d78a3afa8e6dafd3b21a6abbb9b",
+				"dweb:/ipfs/QmZPubEbjjjWVtZHm3eHezqkiCJRevqS9BnugR8hBAJsgw"
 			]
 		}
 	},
