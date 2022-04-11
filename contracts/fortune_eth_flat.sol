@@ -1416,9 +1416,8 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         }
         else     {
             emit Log("Adress is not already whitelisted", _address, WhitelistCount[_id-1], whitelist[_address]);                                
-        }  
-                       
-        // }        
+        }                        
+        
         WhitelistCount[_id-1] -= _count; 
         
     }
