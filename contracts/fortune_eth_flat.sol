@@ -1273,6 +1273,7 @@ pragma solidity ^0.8.4;
 contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
     string public name="Fortune Treasure Hunting";
     string public symbol="FORT";
+    address public treasurer;
       
     uint256[] supplies = [4000, 250];
     uint256[] minted = [0, 0];
@@ -1286,7 +1287,8 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
 
     constructor() ERC1155("") {
         name=name;  
-        symbol=symbol;      
+        symbol=symbol;    
+        treasurer=msg.sender;  
     }
 
     function setURI(uint _id, string memory _uri) external onlyOwner {
@@ -1302,12 +1304,14 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         _unpause();
     }    
 
-    function mintBatch(address _to, uint[] memory _ids, uint[] memory _amounts) external onlyOwner {
-        _mintBatch(_to, _ids, _amounts, "");
-    }
-    
-    function withdrawAll() payable external onlyOwner  {        
-        payable(msg.sender).transfer(address(this).balance);
+    function withdrawAll() payable external onlyOwner  {           
+        payable(treasurer).transfer(address(this).balance);
+    }    
+    function withdrawPart(uint amount) payable external onlyOwner  {  
+        payable(treasurer).transfer(amount);              
+    }    
+    function changeTreasurer(address _treasurer) external onlyTreasurer {  
+        treasurer=_treasurer;              
     }    
     function mintAll(address _to) 
         external 
@@ -1362,7 +1366,8 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
     {
         super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
     }
-    
+   
+
     function batchWhitelistAddress(address[] memory _addresses, uint256 _id) 
         external 
         onlyOwner
@@ -1383,11 +1388,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
             else     {
                 emit Log("address is already whitelisted", _addresses[i], WhitelistCount[_id-1], whitelist[_addresses[i]]);                
             }               
-        }
-        
-        
-        // WhitelistCount[_id-1] += _count[_id-1];
-        // WhitelistCount[0] += _count[0];
+        }        
     }      
   
     function batchRemoveWhitelist(address[] memory _addresses, uint256 _id) 
@@ -1407,9 +1408,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         internal 
         onlyOwner
         validTokenId (_id) 
-    {
-        // uint8[2] memory _count=[0,0];
-        // for (uint i=0; i<_addresses.length; i++) {            
+    {        
         if (whitelist[_address] !=0) {                
             if (_id ==1) {                
                 whitelist[_address]=0;                
@@ -1423,11 +1422,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         }
         else     {
             emit Log("Adress is not already whitelisted", _address, WhitelistCount[_id-1], whitelist[_address]);                                
-        }                        
-        
-        // WhitelistCount[_id-1] -= _count[_id-1]; 
-        // WhitelistCount[_id-1] -= _count[0]; 
-        
+        }  
     }
     function IsWhitelisted(address _address) public view returns (uint) {                
         return whitelist[_address];        
@@ -1451,6 +1446,10 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
     modifier validTokenId(uint256 _id) {
         emit Log("Modifer validTokenId", msg.sender, 0, whitelist[msg.sender]);
         require(_id <= supplies.length && _id >0, "Token doesn't exist");    
+        _;
+    }
+    modifier onlyTreasurer() {        
+        require(msg.sender == treasurer, "Only the current treasurer can call this function");    
         _;
     }
 
