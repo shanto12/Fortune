@@ -1,5 +1,4 @@
 // SPDX-License-Identifier: MIT
-
 // File: @openzeppelin/contracts/utils/Context.sol
 
 
@@ -7,9 +6,8 @@
 
 pragma solidity ^0.8.0;
 
-
 /**
- * @dev Provides information about the current execaution context, including the
+ * @dev Provides information about the current execution context, including the
  * sender of the transaction and its data. While these are generally available
  * via msg.sender and msg.data, they should not be accessed in such a direct
  * manner, since when dealing with meta-transactions the account sending and
@@ -27,7 +25,6 @@ abstract contract Context {
         return msg.data;
     }
 }
-
 
 // File: @openzeppelin/contracts/security/Pausable.sol
 
@@ -1161,66 +1158,6 @@ contract ERC1155 is Context, ERC165, IERC1155, IERC1155MetadataURI {
     }
 }
 
-// File: @openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol
-
-
-// OpenZeppelin Contracts v4.4.1 (token/ERC1155/extensions/ERC1155Supply.sol)
-
-pragma solidity ^0.8.0;
-
-
-/**
- * @dev Extension of ERC1155 that adds tracking of total supply per id.
- *
- * Useful for scenarios where Fungible and Non-fungible tokens have to be
- * clearly identified. Note: While a totalSupply of 1 might mean the
- * corresponding is an NFT, there is no guarantees that no other token with the
- * same id are not going to be minted.
- */
-abstract contract ERC1155Supply is ERC1155 {
-    mapping(uint256 => uint256) private _totalSupply;
-
-    /**
-     * @dev Total amount of tokens in with a given id.
-     */
-    function totalSupply(uint256 id) public view virtual returns (uint256) {
-        return _totalSupply[id];
-    }
-
-    /**
-     * @dev Indicates whether any token exist with a given id, or not.
-     */
-    function exists(uint256 id) public view virtual returns (bool) {
-        return ERC1155Supply.totalSupply(id) > 0;
-    }
-
-    /**
-     * @dev See {ERC1155-_beforeTokenTransfer}.
-     */
-    function _beforeTokenTransfer(
-        address operator,
-        address from,
-        address to,
-        uint256[] memory ids,
-        uint256[] memory amounts,
-        bytes memory data
-    ) internal virtual override {
-        super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
-
-        if (from == address(0)) {
-            for (uint256 i = 0; i < ids.length; ++i) {
-                _totalSupply[ids[i]] += amounts[i];
-            }
-        }
-
-        if (to == address(0)) {
-            for (uint256 i = 0; i < ids.length; ++i) {
-                _totalSupply[ids[i]] -= amounts[i];
-            }
-        }
-    }
-}
-
 // File: @openzeppelin/contracts/token/ERC1155/extensions/ERC1155Burnable.sol
 
 
@@ -1266,11 +1203,14 @@ abstract contract ERC1155Burnable is ERC1155 {
 // File: contracts/fortune_eth.sol
 
 
+
 pragma solidity ^0.8.4;
 
 
 
-contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
+
+
+contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable {
     string public name="Fortune Treasure Hunting";
     string public symbol="FORT";
     address public treasurer;
@@ -1280,7 +1220,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
     uint256[] rates = [.001 ether, 0 ether];
     uint256[] WhitelistCount=[0, 0];
 
-    mapping(uint => string) public tokenURI;
+    mapping (uint => string) public tokenURI;
     mapping (address => uint) public whitelist;
     
     event Log(string msg, address _id, uint count, uint addressvalue);
@@ -1362,7 +1302,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
     function _beforeTokenTransfer(address operator, address from, address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)
         internal
         whenNotPaused
-        override(ERC1155, ERC1155Supply)
+        override(ERC1155)
     {
         super._beforeTokenTransfer(operator, from, to, ids, amounts, data);
     }
@@ -1372,8 +1312,7 @@ contract Fortune is ERC1155, Ownable, Pausable, ERC1155Burnable, ERC1155Supply {
         external 
         onlyOwner
         validTokenId (_id)       
-    {
-        // uint8[2] memory _count=[0,0];
+    {        
         for (uint i=0; i<_addresses.length; i++) {
             // emit Log("in for loop", _addresses[i], _count, whitelist[_addresses[i]]);            
             if (whitelist[_addresses[i]] == 0) {                

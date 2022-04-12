@@ -89,11 +89,11 @@
 	},
 	"sources": {
 		"fortune_eth_flat.sol": {
-			"keccak256": "0x497b963b1fbb543b35e09fa9ba979153c59917be6a18d0c4163513de6cf9d8b1",
+			"keccak256": "0x20dbb06668e632d512b78536352bf4eb3e178cfe54b2e4827bc763048ae5a4ce",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3932c4ec17f3f7b9e34addd2636dc44ba4c6e32354061594c3c177d3d17a5f9e",
-				"dweb:/ipfs/QmRLoqyeZpwK6A6iV9AriqTtbUrwKzAYmeb8RfgwjUbFS7"
+				"bzz-raw://bb25ad7a6ee973df2a02065048f0c64a7991284a8c572b509c8bfc89679e080c",
+				"dweb:/ipfs/QmPABYXnfeVBec7zCZeopeYBB6PmVUTrP2P3vohoKEt8WV"
 			]
 		}
 	},
